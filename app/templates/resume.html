@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ name }}'s Resume</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #e5eff8;
+        }
+
+        .jumbotron {
+            background-color: #4ca1fc;
+            color: #e5eff8;
+            padding: 40px;
+            margin-bottom: 20px;
+            width: 100%;
+            /* Adjust the width to your liking */
+            border: 5px solid #000000;
+        }
+
+        .profile-pic {
+            width: 300px;
+            height: 380px;
+            border-radius: 50%;
+            border: 5px solid #e5eff8;
+            float: right;
+            margin-left: 20px;
+        }
+
+        .name-about-wrapper {
+            width: 60%;
+            float: left;
+        }
+
+        .clear-float {
+            clear: both;
+        }
+
+        .jumbotron p strong {
+            display: inline-block;
+            width: 100px;
+            margin-right: 10px;
+        }
+
+        /* Style for white links */
+        .white-link {
+            color: #e5eff8;
+            text-decoration: none;
+        }
+
+        /* Hover effect for white links (optional) */
+        .white-link:hover {
+            text-decoration: underline;
+        }
+
+        h1,
+        h2 {
+            color: #343a40;
+        }
+
+        .navbar {
+            background-color: #343a40;
+        }
+
+        .navbar .nav-link {
+            color: #e5eff8;
+        }
+
+        .navbar .nav-link:hover {
+            color: #e5eff8;
+        }
+
+        .dropdown-menu {
+            background-color: #343a40;
+            border: none;
+            box-shadow: none;
+        }
+
+        .dropdown-menu .dropdown-item {
+            color: #e5eff8;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            color: #e5eff8;
+            background-color: #1d2124;
+        }
+
+        .navbar .nav-item.active .nav-link,
+        .navbar .nav-link:hover {
+            color: #007bff;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h3 {
+            border-bottom: 2px solid #419af9;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li::before {
+            content: none;
+            /* Remove bullet points */
+        }
+
+        .main-bullet {
+            list-style-type: disc;
+            /* Style for main bullet points (large) */
+            margin-left: 20px;
+            /* Adjust the spacing of main bullet points */
+        }
+
+        .sub-bullet {
+            list-style-type: circle;
+            /* Style for sub-bullet points (small) */
+            margin-left: 40px;
+            /* Adjust the spacing of sub-bullet points */
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link white-link" href="{{ url_for('view_full_resume') }}">RADHIKA'S RESUME</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onmouseover="showSection('jumbotron')">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onmouseover="showSection('skills')">Skills</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="myWorkDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            My Work
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="myWorkDropdown">
+                            <a class="dropdown-item" href="#" onmouseover="showSection('internships')">Internships</a>
+                            <a class="dropdown-item" href="#" onmouseover="showSection('experiences')">Experiences</a>
+                            <a class="dropdown-item" href="#" onmouseover="showSection('additionalInfo')">Additional
+                                Info</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="academicInfoDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Academic Info
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="academicInfoDropdown">
+                            <a class="dropdown-item" href="#" onmouseover="showSection('education')">Education</a>
+                            <a class="dropdown-item" href="#" onmouseover="showSection('academicProjects')">Academic
+                                Projects</a>
+                            <a class="dropdown-item" href="#" onmouseover="showSection('achievements')">Achievements</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Content Sections -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <section class="section" id="jumbotron">
+                    <div class="jumbotron">
+                        <!-- Your profile picture and personal information here -->
+                        <img src="/static/images/profile-pic.jpeg" alt="Profile Picture" class="profile-pic">
+                        <div class="name-about-wrapper">
+
+                            <h1>{{ name }}</h1>
+                            <h2>{{ title }}</h2>
+                            <p>{{ about }}</p>
+                            <p><strong>Email</strong> : <a href="mailto:{{ email }}" style="color: #e5eff8;">{{ email
+                                    }}</a>
+                            </p>
+                            <p><strong>Contact no.</strong> : {{ contact_number }}</p>
+                            <p><strong>LinkedIn</strong> : <a href="{{ LinkedIn }}" style="color: #e5eff8;"
+                                    target="_blank">{{ LinkedIn }}</a></p>
+                            <p><strong>Github</strong> : <a href="https://github.com/{{ Github }}"
+                                    style="color: #e5eff8;" target="_blank">{{ Github }}</a></p>
+                        </div>
+                        <div class="clear-float"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <section class="section" id="skills">
+            <h3>SKILLS</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <ul class="main-bullet">
+                        {% for skill in skills[:6] %}
+                        <li>{{ skill }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="main-bullet">
+                        {% for skill in skills[6:12] %}
+                        <li>{{ skill }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="main-bullet">
+                        {% for skill in skills[12:] %}
+                        <li>{{ skill }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="education">
+            <!-- Your education content here -->
+            <h3>EDUCATION</h3>
+            <ul class="main-bullet">
+                {% for edu in education %}
+                <li>{{ edu.school }} {{ edu.college }} {{ edu.degree }} ({{ edu.year }})</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="section" id="academicProjects">
+            <!-- Your academic projects content here -->
+            <h3>ACADEMIC PROJECTS</h3>
+            <ul class="main-bullet">
+                {% for proj in academic_projects %}
+                <li>
+                    <strong>{{ proj.project_name }}</strong> - ({{ proj.duration }})<br>
+                    <ul class="sub-bullet">
+                        {% for point in proj.description %}
+                        <li>{{ point }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="section" id="achievements">
+            <!-- Your achievements content here -->
+            <h3>ACHIEVEMENTS</h3>
+            <ul class="main-bullet">
+                {% for achievement in achievements %}
+                <li>{{ achievement }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="section" id="internships">
+            <!-- Your internships content here -->
+            <h3>INTERNSHIPS</h3>
+            <ul class="main-bullet">
+                {% for intern in internships %}
+                <li>
+                    <strong>{{ intern.title }}</strong> - {{ intern.company }} ({{ intern.duration }})<br>
+                    {{ intern.description }}
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="section" id="experiences">
+            <!-- Your experiences content here -->
+            <h3>EXPERIENCES</h3>
+            <ul class="main-bullet">
+                {% for exp in experience %}
+                <li>
+                    <strong>{{ exp.title }}</strong> - {{ exp.company }} ({{ exp.duration }})<br>
+                    {{ exp.description }}
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="section" id="achievements">
+            <!-- Your achievements content here -->
+            <h3>ACHIEVEMENTS</h3>
+            <ul class="main-bullet">
+                {% for achievement in achievements %}
+                <li>{{ achievement }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="section" id="additionalInfo">
+            <!-- Your additional information content here -->
+            <h3>ADDITIONAL INFORMATION</h3>
+            <ul class="main-bullet">
+                {% for info in additional_info %}
+                <li>{{ info }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <!-- Add this JavaScript code -->
+    <script>
+        $(document).ready(function () {
+            $('.nav-item').click(function () {
+                $('.nav-item').removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+    </script>
+
+
+
+    <script>
+        function hideAllSections() {
+            const sections = document.getElementsByClassName("section");
+            for (let i = 0; i < sections.length; i++) {
+                sections[i].style.display = "none";
+            }
+        }
+
+        function showSection(sectionId) {
+            hideAllSections();
+            const sectionToShow = document.getElementById(sectionId);
+            if (sectionToShow) {
+                sectionToShow.style.display = "block";
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>
